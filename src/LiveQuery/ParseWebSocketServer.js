@@ -42,6 +42,7 @@ export class ParseWebSocket extends events.EventEmitter {
     ws.onmessage = request =>
       this.emit('message', request && request.data ? request.data : request);
     ws.onclose = () => this.emit('disconnect');
+    ws.onerror = error => logger.error('Received error from websocket: ', error);
     this.ws = ws;
   }
 
